@@ -27,6 +27,6 @@ public class ResultadoActivity extends AppCompatActivity {
         TextView res = (TextView)findViewById(R.id.txtResultado);
 
         res.setGravity(Gravity.CENTER_VERTICAL| Gravity.CENTER_HORIZONTAL);
-        res.setText("A probabilidade de haver essa doença na sua região "+resultado+"%");
+        res.setText("A probabilidade de haver esquistossomose na sua região é de : "+resultado+"%");
     }
 }

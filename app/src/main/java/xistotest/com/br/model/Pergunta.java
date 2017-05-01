@@ -9,7 +9,6 @@ public class Pergunta {
     private String pegunta;
     private String resposta;
     private String gabarito;
-    private String imagem;
 
     public Pergunta(String pergunta,String gabarito){
         this.pegunta = pergunta;
@@ -40,11 +39,4 @@ public class Pergunta {
         this.resposta = resposta;
     }
 
-    public String getImagem() {
-        return imagem;
-    }
-
-    public void setImagem(String imagem) {
-        this.imagem = imagem;
-    }
 }

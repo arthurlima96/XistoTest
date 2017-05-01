@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import xistotest.com.br.model.Pergunta;
+import xistotest.com.br.model.PerguntaComFoto;
 
 /**
  * Created by Arthur C. Lima on 14/04/2017.
@@ -23,11 +25,14 @@ public class QuestionActivity extends AppCompatActivity {
     private Button  btnProx;
     private RadioGroup btnRadio;
     private RadioButton btRadio;
+    private ImageView imgPergunta;
 
     private Intent intent;
     private Bundle bundle;
 
     private Pergunta[] q;
+    private PerguntaComFoto pf;
+    private Pergunta p;
     private int c=0;
     private double resultado;
 
@@ -40,12 +45,14 @@ public class QuestionActivity extends AppCompatActivity {
 
         q[0] = new Pergunta("Na sua região existe algum centro de tratamento de esgoto ?","SIM");
         q[1] = new Pergunta("No seu bairro existem regiões ou focos de alagamentos ?","SIM");
-        q[2] = new Pergunta("Você já observou algum desses moluscos próximos às regiões alagadas ?","SIM");
+        q[2] = new PerguntaComFoto("Você já observou algum desses moluscos próximos às regiões alagadas ?","SIM",R.drawable.caramujos);
         q[3] = new Pergunta("As atividades que são fontes de renda na sua área, em que você mora. Envolvem rios, açudes ou lagoas tais como pecuária, pesca e agricultura ?","SIM");
+
 
         pergunta = (TextView) findViewById(R.id.txtPergunta);
         btnProx = (Button)findViewById(R.id.btnProx);
         btnRadio = (RadioGroup) findViewById(R.id.btnRadio);
+        imgPergunta = (ImageView)findViewById(R.id.fotoPergunta);
 
         pergunta.setGravity(Gravity.CENTER_VERTICAL| Gravity.CENTER_HORIZONTAL);
         pergunta.setText(q[c].getPegunta());
@@ -71,8 +78,6 @@ public class QuestionActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void contabilizarRes() {
@@ -85,7 +90,16 @@ public class QuestionActivity extends AppCompatActivity {
         btnRadio.clearCheck();
         if(c != q.length-1){
             c++;
-            pergunta.setText(q[c].getPegunta());
+            if (q[c].getClass() == PerguntaComFoto.class){
+                pf = (PerguntaComFoto) q[c];
+                pergunta.setText(pf.getPegunta());
+                imgPergunta.setImageResource(pf.getImagem());
+                imgPergunta.setVisibility(View.VISIBLE);
+            }else {
+                pergunta.setText(q[c].getPegunta());
+                imgPergunta.setVisibility(View.INVISIBLE);
+            }
+
         }else{
             btnProx.setText("Finalizar");
 
